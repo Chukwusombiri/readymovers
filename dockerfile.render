@@ -14,8 +14,8 @@ RUN apk update && apk add --no-cache \
     libwebp-dev \
     oniguruma-dev \
     zip \
-    unzip \    
-    bash   
+    unzip \
+    bash
 
 # install PHP depencies
 RUN docker-php-ext-configure gd --with-jpeg --with-webp && \
@@ -61,8 +61,7 @@ RUN apk update && apk add --no-cache \
     libjpeg-turbo \
     libwebp \
     libzip \
-    oniguruma \
-    postgresql-libs
+    oniguruma
 
 # Install Nginx + Supervisor
 RUN mkdir -p /var/log/supervisor
