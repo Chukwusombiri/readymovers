@@ -1,0 +1,65 @@
+# version: '3.24.3'
+name: readymovers
+services:
+  app:
+    build:
+      context: .
+      target: production    
+    container_name: readymovers_app
+    restart: unless-stopped
+    develop: 
+      watch: 
+        - path: .
+          action: sync
+          target: /var/www
+    ports:
+      - "9000:9000"
+    environment:
+        DB_CONNECTION: mysql
+        DB_HOST: db
+        DB_PORT: 3306
+        DB_DATABASE: readymovers_db
+        DB_USERNAME: readymovers_user
+        DB_PASSWORD: userpassword
+    env_file:
+      - .env
+    depends_on:
+      - db
+    networks:
+      - readymovers_network
+    
+  webserver:
+    build:
+      context: .
+      target: webserver
+    container_name: readymovers_webserver
+    restart: unless-stopped
+    ports:
+      - "8000:80"     
+    depends_on:
+      - app
+    networks: 
+       - readymovers_network
+
+  db:
+    image: mysql:8.0
+    container_name: readymovers_db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_DATABASE: readymovers_db
+      MYSQL_USER: readymovers_user
+      MYSQL_PASSWORD: userpassword
+    ports:
+      - "3307:3306"
+    volumes:
+      - readymovers_db_data:/var/lib/mysql
+    networks: 
+       - readymovers_network
+
+volumes:
+  readymovers_db_data:
+
+networks:
+  readymovers_network:
+    driver: bridge

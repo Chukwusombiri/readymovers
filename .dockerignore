@@ -1,0 +1,33 @@
+# Dependencies
+vendor/
+node_modules/
+
+# Environment
+.env
+.env.local
+.env.*.local
+.env.example
+.env.production
+
+# System / IDE
+.DS_Store
+.vscode/
+.idea/
+
+# Logs & cache
+*.log
+storage/logs/*
+storage/framework/sessions/*
+storage/framework/cache/*
+bootstrap/cache/*.php
+
+# Build outputs
+npm-debug.log
+yarn-error.log
+
+# Tests (optional)
+tests/
+
+# Misc
+docker-compose.override.yml
+README.md
