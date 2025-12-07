@@ -72,7 +72,7 @@ COPY --from=builder /usr/local/etc/php/conf.d /usr/local/etc/php/conf.d
 COPY --from=builder /usr/local/lib/php/extensions/no-debug-non-zts-20230831/ /usr/local/lib/php/extensions/no-debug-non-zts-20230831/
 
 # Copy nginx config
-COPY ./docker/nginx/nginx.render.conf /etc/nginx/nginx.conf
+COPY ./docker/nginx.render.conf /etc/nginx/nginx.conf
 
 # Copy supervisord config
 COPY ./docker/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
