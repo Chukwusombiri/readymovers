@@ -87,4 +87,9 @@ RUN chown -R www-data:www-data /var/www/storage /var/www/bootstrap/cache
 EXPOSE 80
 
 # Use a script for startup to handle migrations properly
-CMD ["sh", "-c", "php artisan migrate --force && /usr/bin/supervisord"]
+# CMD ["sh", "-c", "php artisan migrate --force && /usr/bin/supervisord"]
+# CMD ["sh", "-c", "php artisan migrate --force && supervisord -c /etc/supervisor/conf.d/supervisord.conf"]
+
+COPY docker/entrypoint.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["/entrypoint.sh"]
